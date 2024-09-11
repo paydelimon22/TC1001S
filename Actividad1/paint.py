@@ -38,10 +38,11 @@ def square(start, end):
     end_fill()
 
 def circle(start, end):
+    """Draw cirlce from start to end"""
     speed(0)
-    radius = math.sqrt((end.x - start.x)**2 + (end.y - start.y)**2)
+    radius = math.dist(end, start)
     up()
-    goto(start.x, start.y + radius)
+    goto(start.x, start.y)
     begin_fill()
     down()
     times_y_crossed = 0
