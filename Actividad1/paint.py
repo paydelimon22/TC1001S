@@ -41,7 +41,7 @@ def circle(start, end):
     speed(0)
     radius = math.sqrt((end.x - start.x)**2 + (end.y - start.y)**2)
     up()
-    goto(start.x, start.y) 
+    goto(start.x, start.y + radius)
     begin_fill()
     down()
     times_y_crossed = 0
