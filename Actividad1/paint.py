@@ -13,7 +13,7 @@ from turtle import *
 
 from freegames import vector
 
-#ADDED IMPORT
+# Needed for precise math calculations
 import math
 
 def line(start, end):
