@@ -43,7 +43,7 @@ def circle(start, end):
 
 def rectangle(start, end):
     """Draw rectangle with opposite corners start and end.
-    
+
     Parameters:
         start: starting corner of rectangle.
         end: opposite corner of rectangle.
@@ -67,7 +67,7 @@ def rectangle(start, end):
 
 def triangle(start, end):
     """Draw a triangle contained in a rectangular bounding box.
-    
+
     Parameters:
         start: First corner of the bounding box.
         end: Opposite corner of the bounding box.
@@ -84,7 +84,7 @@ def triangle(start, end):
 
     # Draw tip of triangle
     goto((end.x - start.x) / 2 + start.x, end.y)
-    
+
     # Return to start
     goto(start.x, start.y)
 
