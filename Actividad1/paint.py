@@ -38,7 +38,12 @@ def square(start, end):
     end_fill()
 
 def circle(start, end):
-    """Draw cirlce from start to end"""
+    """Draw cirlce with center at start, and circumference at end
+    
+    Parameters:
+        start: Center of the circle
+        end: Point in the circumference of the circle.
+    """
     speed(0)
     radius = math.dist(end, start)
     up()
