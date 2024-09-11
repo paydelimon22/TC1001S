@@ -46,13 +46,18 @@ def circle(start, end):
     down()
     times_y_crossed = 0
     x_sign = 1.0
+    # While the turtle hasn't crossed the middle of the circle more than once.
+    # (While the turtle hasn't drawn both halves of the circle)
     while times_y_crossed <= 1:
+        # Advance 1 degree of rotation of the circle.
         forward(2 * math.pi * radius/360.0)
+        # Turn right 1 degree.
         right(1.0)
-        x_sign_new = math.copysign(1,xcor()-start.x)        
+        # Compare if the turtle has changed sides of the circle.
+        x_sign_new = math.copysign(1,xcor()-start.x)
         if(x_sign_new != x_sign):
             times_y_crossed += 1
-        x_sign = x_sign_new
+            x_sign = x_sign_new
     end_fill()
     up()
 
