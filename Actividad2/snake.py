@@ -24,7 +24,6 @@ snakeColor = colors.pop(snakeIndex)
 
 fruitIndex = randrange(len(colors))
 fruitColor = colors[fruitIndex]
-"""End of changes"""
 
 def change(x, y):
     """Change snake direction."""
