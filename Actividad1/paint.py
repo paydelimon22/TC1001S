@@ -37,7 +37,6 @@ def square(start, end):
 
     end_fill()
 
-#Function stolen from Stack overflow
 def circle(start, end):
     speed(0)
     radius = math.sqrt((end.x - start.x)**2 + (end.y - start.y)**2)
