@@ -29,6 +29,26 @@ def inside(head):
     return -200 < head.x < 190 and -200 < head.y < 190
 
 
+def food_move():
+    """Randomly move the food one segment in any direction."""
+    directions = [vector(10, 0), vector(-10, 0), vector(0, 10), vector(0, -10)]
+    rand_index = randrange(len(directions))
+    food.move(directions[rand_index])
+
+    original_rand_index = rand_index  # Keep track of original direction.
+    # Make sure the food doesn't move into the snake body, or out of bounds.
+    while food in snake or not inside(food):
+        food.move(-directions[rand_index])  # Revert movement.
+        rand_index = (rand_index + 1) % len(directions)  # Try next direction.
+        # Break loop if all directions are invalid. Food can't move.
+        if (rand_index == original_rand_index):
+            break
+        food.move(directions[rand_index])  # Move in new direction.
+
+    update()
+    ontimer(food_move, 100)
+
+
 def move():
     """Move snake forward one segment."""
     head = snake[-1].copy()
@@ -66,5 +86,6 @@ onkey(lambda: change(10, 0), 'Right')
 onkey(lambda: change(-10, 0), 'Left')
 onkey(lambda: change(0, 10), 'Up')
 onkey(lambda: change(0, -10), 'Down')
+food_move()
 move()
 done()
