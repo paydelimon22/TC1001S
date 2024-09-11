@@ -44,7 +44,6 @@ def circle(start, end):
         start: Center of the circle
         end: Point in the circumference of the circle.
     """
-    speed(0)
     radius = math.dist(end, start)
     up()
     goto(start.x, start.y)
