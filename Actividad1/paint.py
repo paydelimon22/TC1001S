@@ -42,13 +42,54 @@ def circle(start, end):
 
 
 def rectangle(start, end):
-    """Draw rectangle from start to end."""
-    pass  # TODO
+    """Draw rectangle with opposite corners start and end.
+
+    Parameters:
+        start: starting corner of rectangle.
+        end: opposite corner of rectangle.
+    """
+
+    # Go to starting corner
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+
+    # Go to rest of corners
+    goto(end.x, start.y)
+    goto(end.x, end.y)
+    goto(start.x, end.y)
+    goto(start.x, start.y)
+
+    # End fill area
+    end_fill()
 
 
 def triangle(start, end):
-    """Draw triangle from start to end."""
-    pass  # TODO
+    """Draw a triangle contained in a rectangular bounding box.
+
+    Parameters:
+        start: First corner of the bounding box.
+        end: Opposite corner of the bounding box.
+    """
+
+    # Go to starting corner of the bounding box
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+
+    # Draw base of triangle
+    goto(end.x, start.y)
+
+    # Draw tip of triangle
+    goto((end.x - start.x) / 2 + start.x, end.y)
+
+    # Return to start
+    goto(start.x, start.y)
+
+    end_fill()
+
 
 
 def tap(x, y):
