@@ -13,6 +13,8 @@ from turtle import *
 
 from freegames import vector
 
+# Needed for precise math calculations
+import math
 
 def line(start, end):
     """Draw line from start to end."""
@@ -35,11 +37,34 @@ def square(start, end):
 
     end_fill()
 
-
 def circle(start, end):
-    """Draw circle from start to end."""
-    pass  # TODO
-
+    """Draw cirlce with center at start, and circumference at end
+    
+    Parameters:
+        start: Center of the circle
+        end: Point in the circumference of the circle.
+    """
+    radius = math.dist(end, start)
+    up()
+    goto(start.x, start.y + radius)
+    begin_fill()
+    down()
+    times_y_crossed = 0
+    x_sign = 1.0
+    # While the turtle hasn't crossed the middle of the circle more than once.
+    # (While the turtle hasn't drawn both halves of the circle)
+    while times_y_crossed <= 1:
+        # Advance 1 degree of rotation of the circle.
+        forward(2 * math.pi * radius/360.0)
+        # Turn right 1 degree.
+        right(1.0)
+        # Compare if the turtle has changed sides of the circle.
+        x_sign_new = math.copysign(1,xcor()-start.x)
+        if(x_sign_new != x_sign):
+            times_y_crossed += 1
+            x_sign = x_sign_new
+    end_fill()
+    up()
 
 def rectangle(start, end):
     """Draw rectangle with opposite corners start and end.
@@ -120,6 +145,8 @@ onkey(lambda: color('white'), 'W')
 onkey(lambda: color('green'), 'G')
 onkey(lambda: color('blue'), 'B')
 onkey(lambda: color('red'), 'R')
+onkey(lambda: color('pink'), 'P')
+
 onkey(lambda: store('shape', line), 'l')
 onkey(lambda: store('shape', square), 's')
 onkey(lambda: store('shape', circle), 'c')
