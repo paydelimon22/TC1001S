@@ -20,13 +20,52 @@ tiles = list(range(32)) * 2
 state = {'mark': None}
 hide = [True] * 64
 
+colors = [
+    "Red",
+    "Green",
+    "Blue",
+    "Yellow",
+    "Cyan",
+    "Magenta",
+    "Maroon",
+    "Olive",
+    "DarkGreen",
+    "Purple",
+    "Teal",
+    "Navy",
+    "Orange",
+    "Pink",
+    "Silver",
+    "Gray",
+    "Coral",      
+    "Gold",       
+    "Brown",
+    "Beige",
+    "LightBlue",
+    "LightGreen",
+    "LightPink",
+    "LightYellow",
+    "Crimson",
+    "Orchid",
+    "DarkSlateBlue",
+    "SeaGreen",
+    "Chocolate",
+    "Tomato",
+    "LightSlateGray",
+    "MediumSlateBlue"
+]
 
-def square(x, y):
+
+
+def square(x, y, sqr_color=None):
     """Draw white square with black outline at (x, y)."""
     up()
     goto(x, y)
     down()
-    color('black', 'white')
+    if sqr_color is None:
+        color('black', 'white')
+    else:
+        color('black', sqr_color)
     begin_fill()
     for count in range(4):
         forward(50)
@@ -84,9 +123,9 @@ def draw():
 
     if mark is not None and hide[mark]:
         x, y = xy(mark)
+        square(x, y, colors[tiles[mark]])
         up()
         goto(x + 25, y)
-        color('black')
         write(tiles[mark], align="center", font=('Arial', 30, 'normal'))
 
     up()
