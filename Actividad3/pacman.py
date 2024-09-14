@@ -140,6 +140,21 @@ def move():
                 vector(0, 10),
                 vector(0, -10),
             ]
+
+            # Figure out best option to get closer to pacman.
+            best_dist_to_pacman = None
+            for opt in options:
+                opt_dist_to_pacman = distance(point.x + opt.x, point.y + opt.y)
+
+                if (best_dist_to_pacman is None
+                    or opt_dist_to_pacman < best_dist_to_pacman):
+                    best_dist_to_pacman = opt_dist_to_pacman
+                    best_opt = opt
+
+            # Add 6 copies of best option to pool of options.
+            # Increase chance of taking best option from 25% to 70%.
+            options += [best_opt] * 6
+
             plan = choice(options)
             course.x = plan.x
             course.y = plan.y
