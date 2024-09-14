@@ -66,10 +66,19 @@ def draw():
     shape(car)
     stamp()
 
+    all_discovered = True
     for count in range(64):
         if hide[count]:
             x, y = xy(count)
             square(x, y)
+            all_discovered = False
+
+    if all_discovered:
+        up()
+        goto(0,-200)
+        pencolor("white")
+        write("You win!", align="center", font=("Arial", 30, "normal"))
+        return
 
     mark = state['mark']
 
