@@ -99,7 +99,7 @@ def draw():
 
 
 shuffle(tiles)
-setup(420, 420, 370, 0)
+setup(420, 450, 370, 0)
 addshape(car)
 hideturtle()
 tracer(False)
