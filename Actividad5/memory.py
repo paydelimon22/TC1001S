@@ -14,18 +14,58 @@ from turtle import *
 
 from freegames import path
 
+number_of_taps = 0
 car = path('car.gif')
 tiles = list(range(32)) * 2
 state = {'mark': None}
 hide = [True] * 64
 
+colors = [
+    "Red",
+    "Green",
+    "Blue",
+    "Yellow",
+    "Cyan",
+    "Magenta",
+    "Maroon",
+    "Olive",
+    "DarkGreen",
+    "Purple",
+    "Teal",
+    "Navy",
+    "Orange",
+    "Pink",
+    "Silver",
+    "Gray",
+    "Coral",      
+    "Gold",       
+    "Brown",
+    "Beige",
+    "LightBlue",
+    "LightGreen",
+    "LightPink",
+    "LightYellow",
+    "Crimson",
+    "Orchid",
+    "DarkSlateBlue",
+    "SeaGreen",
+    "Chocolate",
+    "Tomato",
+    "LightSlateGray",
+    "MediumSlateBlue"
+]
 
-def square(x, y):
+
+
+def square(x, y, sqr_color=None):
     """Draw white square with black outline at (x, y)."""
     up()
     goto(x, y)
     down()
-    color('black', 'white')
+    if sqr_color is None:
+        color('black', 'white')
+    else:
+        color('black', sqr_color)
     begin_fill()
     for count in range(4):
         forward(50)
@@ -45,6 +85,8 @@ def xy(count):
 
 def tap(x, y):
     """Update mark and hidden tiles based on tap."""
+    global number_of_taps
+    number_of_taps += 1
     spot = index(x, y)
     mark = state['mark']
 
@@ -63,26 +105,40 @@ def draw():
     shape(car)
     stamp()
 
+    all_discovered = True
     for count in range(64):
         if hide[count]:
             x, y = xy(count)
             square(x, y)
+            all_discovered = False
+
+    if all_discovered:
+        up()
+        goto(0,-200)
+        pencolor("white")
+        write("You win!", align="center", font=("Arial", 30, "normal"))
+        return
 
     mark = state['mark']
 
     if mark is not None and hide[mark]:
         x, y = xy(mark)
+        square(x, y, colors[tiles[mark]])
         up()
-        goto(x + 2, y)
-        color('black')
-        write(tiles[mark], font=('Arial', 30, 'normal'))
+        goto(x + 25, y)
+        write(tiles[mark], align="center", font=('Arial', 30, 'normal'))
+
+    up()
+    goto(0,200)
+    write(f"Number of taps: {number_of_taps}", align="center",
+          font=("Arial", 12, "normal"))
 
     update()
     ontimer(draw, 100)
 
 
 shuffle(tiles)
-setup(420, 420, 370, 0)
+setup(420, 450, 370, 0)
 addshape(car)
 hideturtle()
 tracer(False)
